@@ -82,7 +82,7 @@ const writeCSV = async batch => {
       for (package of packages) {
         if (package.package !== undefined || package.downloads !== undefined) {
           fileStream.write(package.package);
-          fileStream.write(", ");
+          fileStream.write(",");
           fileStream.write(package.downloads.toString());
           fileStream.write("\n");
         }
