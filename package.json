@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/MattMorgis/request-dependencies/issues"
   },
-  "homepage": "https://github.com/MattMorgis/request-dependencies#readme"
+  "homepage": "https://github.com/MattMorgis/request-dependencies#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
 }
