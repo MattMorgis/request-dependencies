@@ -5,7 +5,7 @@ const got = require("got");
 
 const PACKAGE_NAME = "request";
 
-// https://github.com/npm/registry/blob/master/docs/REPLICATE-API.md
+https://github.com/npm/registry/blob/master/docs/REPLICATE-API.md#overview
 const dependentPackagesByPage = (package, page) => {
   const registry = new URL(
     "/registry/_design/app/_view/dependedUpon",
@@ -41,6 +41,11 @@ async function* getDependentPackagesByBatches(package, batches = 1000) {
       const packages = await got(dependentPackagesByPage(package, page), {
         json: true
       });
+      if (packages.body.rows.length === 0) {
+        process.stdout.write("Finished processing all dependecies");
+        process.stdout.write("\n");
+        process.exit(1);
+      }
       yield packages.body.rows;
     } catch (e) {
       throw e;
@@ -80,7 +85,10 @@ const writeCSV = async batch => {
     fileStream.write("\n");
     for await (const packages of batch) {
       for (package of packages) {
-        if (package.package !== undefined || package.downloads !== undefined) {
+        if (
+          (package.package !== undefined || package.downloads !== undefined) &&
+          package.downloads > 100
+        ) {
           fileStream.write(`"${package.package}"`);
           fileStream.write(",");
           fileStream.write(package.downloads.toString());
