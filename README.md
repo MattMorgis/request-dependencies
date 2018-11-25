@@ -37,7 +37,7 @@ Dependent packages are pulled from `http://skimdb.npmjs.com` in batches of 100 a
 
 It then hits npm's [point values API](https://github.com/npm/registry/blob/master/docs/download-counts.md#point-values) to get the download count for each package for the past 30 days.
 
-It then writes the results to a `.csv`. It excludes packages with download counts less than 100 to avoid noise.
+It then writes the results to a `.csv`.
 
 I only include packages that have more than 100 downloads.
 
