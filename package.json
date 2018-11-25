@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/MattMorgis/request-dependencies#readme",
   "dependencies": {
-    "request": "^2.88.0"
+    "arrasync": "^0.1.1",
+    "got": "^9.3.2"
   }
 }
