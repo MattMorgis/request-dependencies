@@ -49,9 +49,7 @@ async function* getDependentPackagesByBatches(package, batches = 1000) {
 }
 
 async function* getPackageDownloads(batches) {
-  let batch = 0;
   for await (const packages of batches) {
-    batch++;
     const packageDownloads = await map(packages, async p => {
       try {
         process.stdout.write(
@@ -78,10 +76,12 @@ async function* getPackageDownloads(batches) {
 const writeCSV = async batch => {
   const fileStream = fs.createWriteStream(__dirname + "/results.csv");
   try {
+    fileStream.write(`"package","downloads"`);
+    fileStream.write("\n");
     for await (const packages of batch) {
       for (package of packages) {
         if (package.package !== undefined || package.downloads !== undefined) {
-          fileStream.write(package.package);
+          fileStream.write(`"${package.package}"`);
           fileStream.write(",");
           fileStream.write(package.downloads.toString());
           fileStream.write("\n");
