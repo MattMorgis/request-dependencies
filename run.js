@@ -5,7 +5,7 @@ const got = require("got");
 
 const PACKAGE_NAME = "request";
 
-https://github.com/npm/registry/blob/master/docs/REPLICATE-API.md#overview
+// https://github.com/npm/registry/blob/master/docs/REPLICATE-API.md#overview
 const dependentPackagesByPage = (package, page) => {
   const registry = new URL(
     "/registry/_design/app/_view/dependedUpon",
